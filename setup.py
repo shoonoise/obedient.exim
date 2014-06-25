@@ -4,7 +4,7 @@ if __name__ == '__main__':
     setuptools.setup(
         name='obedient.exim',
         version='0.1',
-        url='https://github.com/nikicat/obedient-exim',
+        url='https://github.com/yandex-sysmon/obedient-exim',
         license='GPLv3',
         author='Nikolay Bryskin',
         author_email='devel.niks@gmail.com',
@@ -12,5 +12,5 @@ if __name__ == '__main__':
         platforms='linux',
         packages=['obedient.exim'],
         namespace_packages=['obedient'],
-        install_requires=['dominator == 0.3'],
+        install_requires=['dominator >= 0.4'],
     )
