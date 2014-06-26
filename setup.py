@@ -12,5 +12,5 @@ if __name__ == '__main__':
         platforms='linux',
         packages=['obedient.exim'],
         namespace_packages=['obedient'],
-        install_requires=['dominator >= 0.4'],
+        install_requires=['dominator >=1, <2'],
     )

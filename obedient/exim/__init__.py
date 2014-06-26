@@ -1,17 +1,15 @@
-from datetime import datetime
-from dominator import *
+from dominator.entities import *
 
-@aslist
-def create(ships, port=25, repository='yandex/exim', tag='{:d%Y%m%d}'.format(datetime.utcnow())):
+
+def create(ships, port=25, repository='yandex/exim'):
     db_volume = DataVolume(name='db', dest='/var/spool/exim4/db')
-    image = Image(repository, tag=tag)
-    for ship in ships:
-        yield Container(
-            name='exim',
-            ship=ship,
-            image=image,
-            memory=200*1024*1024,
-            ports={'smtp': 25},
-            extports={'smtp': port},
-            volumes=[db_volume],
-        )
+    image = Image(repository)
+    return [Container(
+        name='exim',
+        ship=ship,
+        image=image,
+        memory=200*1024*1024,
+        ports={'smtp': 25},
+        extports={'smtp': port},
+        volumes=[db_volume],
+    ) for ship in ships]
