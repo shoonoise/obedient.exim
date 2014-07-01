@@ -1,8 +1,8 @@
 from dominator.entities import *
 
 
-def create(ships, port=25, repository='yandex/exim'):
-    db_volume = DataVolume(name='db', dest='/var/spool/exim4/db')
+def create(ships, port=25):
+    db_volume = DataVolume('/var/spool/exim4/db')
     image = SourceImage(
         name='exim',
         parent=Image('yandex/trusty'),
@@ -12,7 +12,7 @@ exim4-config\texim4/dc_eximconfig_configtype\tstring\tinternet site; mail is sen
 exim4-config\texim4/dc_relay_domains\tstring\t*" | debconf-set-selections',
             'apt-get install -y exim4',
         ],
-        ports=[25],
+        ports={'smtp': 25},
         command='/usr/sbin/exim4 -bdf -v -q30m',
     )
     return [Container(
@@ -20,7 +20,7 @@ exim4-config\texim4/dc_relay_domains\tstring\t*" | debconf-set-selections',
         ship=ship,
         image=image,
         memory=200*1024*1024,
-        ports={'smtp': 25},
+        ports=image.ports,
         extports={'smtp': port},
-        volumes=[db_volume],
+        volumes={'data': db_volume},
     ) for ship in ships]
