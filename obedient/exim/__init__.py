@@ -1,4 +1,4 @@
-from dominator.entities import *
+from dominator.entities import DataVolume, Image, SourceImage, Container
 
 
 def create(ships, port=25):
