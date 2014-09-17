@@ -3,7 +3,7 @@ import setuptools
 if __name__ == '__main__':
     setuptools.setup(
         name='obedient.exim',
-        version='1.1',
+        version='1.2',
         url='https://github.com/yandex-sysmon/obedient-exim',
         license='GPLv3',
         author='Nikolay Bryskin',
